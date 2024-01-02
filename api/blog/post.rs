@@ -15,27 +15,6 @@ async fn main() -> Result<(), Error> {
     run(handler).await
 }
 
-// #[tokio::main]
-// async fn main() -> Result<(), Error> {
-//     // let cors = warp::cors()
-//     //     .allow_any_origin()
-//     //     .allow_methods(vec!["GET", "POST", "PUT", "DELETE", "OPTIONS"])
-//     //     .allow_headers(vec!["Content-Type", "Authorization"]);
-//     //
-//     // let routes = warp::path!("api" / "blog" / "post")
-//     //     .and(warp::post())
-//     //     .and(warp::body::json())
-//     //     .map(|blog_post: BlogPost| {
-//     //         println!("Parsed BlogPost: {:?}", blog_post);
-//     //         warp::reply::json(&blog_post)
-//     //     });
-//     // warp::serve(routes.with(cors))
-//     //     .run(([127, 0, 0, 1], 8000))
-//     //     .await;
-//     //
-//     run(handler).await;
-// }
-//
 pub async fn handler(req: Request) -> Result<Response<Body>, Error> {
     // Extract the body from the request
     let body = req.into_body();
@@ -45,20 +24,13 @@ pub async fn handler(req: Request) -> Result<Response<Body>, Error> {
         Body::Empty => {
             // Return a bad request response if the body is empty
             // Ok(bad_request("Empty body"))
-            Ok(Response::builder()
-                .status(StatusCode::OK)
-                // .header("Content-Type", "application/json")
-                // .header("Access-Control-Allow-Origin", "*")
-                // .header("Access-Control-Allow-Methods", "*")
-                // .header("Access-Control-Allow-Headers", "*")
-                // .header("Access-Control-Allow-Credentials", "true")
-                .body(
-                    json!({
-                      "message": "Empty body",
-                    })
-                    .to_string()
-                    .into(),
-                )?)
+            Ok(Response::builder().status(StatusCode::OK).body(
+                json!({
+                  "message": "Empty body",
+                })
+                .to_string()
+                .into(),
+            )?)
         }
         Body::Text(text) => {
             // Deserialize the JSON body into the BlogPostInput struct
@@ -75,38 +47,24 @@ pub async fn handler(req: Request) -> Result<Response<Body>, Error> {
                     );
 
                     // Return a response with the new blog post information
-                    Ok(Response::builder()
-                        .status(StatusCode::OK)
-                        // .header("Content-Type", "application/json")
-                        // .header("Access-Control-Allow-Origin", "*")
-                        // .header("Access-Control-Allow-Methods", "*")
-                        // .header("Access-Control-Allow-Headers", "*")
-                        // .header("Access-Control-Allow-Credentials", "true")
-                        .body(
-                            json!({
-                              "message": format!("{:?}!", new_blog_post),
-                            })
-                            .to_string()
-                            .into(),
-                        )?)
+                    Ok(Response::builder().status(StatusCode::OK).body(
+                        json!({
+                          "message": format!("{:?}!", new_blog_post),
+                        })
+                        .to_string()
+                        .into(),
+                    )?)
                 }
                 Err(_) => {
                     // Return a bad request response if JSON parsing fails
                     // Ok(bad_request("Invalid JSON body"))
-                    Ok(Response::builder()
-                        .status(StatusCode::OK)
-                        // .header("Content-Type", "application/json")
-                        // .header("Access-Control-Allow-Origin", "*")
-                        // .header("Access-Control-Allow-Methods", "*")
-                        // .header("Access-Control-Allow-Headers", "*")
-                        // .header("Access-Control-Allow-Credentials", "true")
-                        .body(
-                            json!({
-                              "message": "Invalid JSON body",
-                            })
-                            .to_string()
-                            .into(),
-                        )?)
+                    Ok(Response::builder().status(StatusCode::OK).body(
+                        json!({
+                          "message": "Invalid JSON body",
+                        })
+                        .to_string()
+                        .into(),
+                    )?)
                 }
             }
         }
@@ -127,18 +85,7 @@ pub async fn handler(req: Request) -> Result<Response<Body>, Error> {
                     // Return a response indicating success
                     Ok(Response::builder()
                         .status(StatusCode::OK)
-                        // .header("Content-Type", "application/json")
-                        // .header("Access-Control-Allow-Origin", "*")
-                        // .header("Access-Control-Allow-Methods", "*")
-                        // .header("Access-Control-Allow-Headers", "*")
-                        // .header("Access-Control-Allow-Credentials", "true")
-                        .body(
-                            // json!({"message": "Blog post received and parsed"})
-                            // json!({"message": format!("{:?}", blog_post)})
-                            // .to_string()
-                            // .into(),
-                            { serde_json::to_string(&blog_post)? }.to_string().into(),
-                        )?)
+                        .body({ serde_json::to_string(&blog_post)? }.to_string().into())?)
                 }
                 Err(e) => {
                     // Handle the case where parsing fails
