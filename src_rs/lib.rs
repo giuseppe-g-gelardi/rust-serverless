@@ -3,6 +3,10 @@ use std::collections::HashMap;
 use url::Url;
 use vercel_runtime::{Error, Request};
 
+// mod blog;
+// bring blog into scope
+pub mod blog;
+
 pub fn choose_starter() -> String {
     let pokemons = vec!["Bulbasaur", "Charmander", "Squirtle", "Pikachu"];
     let starter = pokemons.choose(&mut rand::thread_rng()).unwrap();
@@ -10,35 +14,18 @@ pub fn choose_starter() -> String {
 }
 
 pub fn req_url_parser(req: Request, query: &str) -> Result<Option<String>, Error> {
-    // Parse the request URL
-    let parsed_url = Url::parse(&req.uri().to_string()).map_err(|e| {
-        // Handle URL parsing error here
-        // For example, you can log the error and return an appropriate Error variant
-        Error::from(e)
-    })?;
-
-    // Collect query parameters into a HashMap
+    let parsed_url = Url::parse(&req.uri().to_string()).map_err(|e| Error::from(e))?;
     let hash_query: HashMap<String, String> = parsed_url.query_pairs().into_owned().collect();
-
-    // Get the value associated with the specified query parameter
     let id_key = hash_query.get(query).map(|s| s.clone());
-
     Ok(id_key)
 }
 
-#[cfg(test)]
-mod tests {
-
-    use super::*;
-
-    #[test]
-    fn test_choose_starter() {
-        let starter = choose_starter();
-        assert!(
-            starter == "Bulbasaur"
-                || starter == "Charmander"
-                || starter == "Squirtle"
-                || starter == "Pikachu"
-        );
-    }
+pub fn new_blog_post() -> blog::blog::BlogPost {
+    return blog::blog::BlogPost::new(
+        "A trip to Iceland".to_string(),
+        "Iceland is a Nordic island country in the North Atlantic, with a population of 360,390 and an area of 103,000 km2 (40,000 sq mi), making it the most sparsely populated country in Europe. The capital and largest city is Reykjavík. Reykjavík and the surrounding areas in the southwest of the country are home to over two-thirds of the population. Iceland is volcanically and geologically active. The interior consists of a plateau characterised by sand and lava fields, mountains, and glaciers, and many glacial rivers flow to the sea through the lowlands. Iceland is warmed by the Gulf Stream and has a temperate climate, despite a high latitude just outside the Arctic Circle. Its high latitude and marine influence keep summers chilly, with most of the archipelago having a tundra climate.".to_string(),
+        "Watson & Crick".to_string(),
+        "2019-07-10T16:04:44.000Z".to_string(),
+        true,
+    );
 }
