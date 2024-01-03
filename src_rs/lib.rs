@@ -1,16 +1,17 @@
-use rand::seq::SliceRandom;
+// use rand::seq::SliceRandom;
 use std::collections::HashMap;
 use url::Url;
 use vercel_runtime::{Error, Request};
 
 // bring blog into scope
 pub mod blog;
+pub mod blog_post;
 
-pub fn choose_starter() -> String {
-    let pokemons = vec!["Bulbasaur", "Charmander", "Squirtle", "Pikachu"];
-    let starter = pokemons.choose(&mut rand::thread_rng()).unwrap();
-    starter.to_string()
-}
+// pub fn choose_starter() -> String {
+//     let pokemons = vec!["Bulbasaur", "Charmander", "Squirtle", "Pikachu"];
+//     let starter = pokemons.choose(&mut rand::thread_rng()).unwrap();
+//     starter.to_string()
+// }
 
 pub fn req_url_parser(req: Request, query: &str) -> Result<Option<String>, Error> {
     let parsed_url = Url::parse(&req.uri().to_string()).map_err(|e| Error::from(e))?;

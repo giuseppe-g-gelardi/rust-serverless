@@ -29,18 +29,6 @@ name = "index"
 path = "api/index.rs"
 
 [[bin]]
-name = "simple"
-path = "api/simple.rs"
-
-[[bin]]
-name = "complex"
-path = "api/complex.rs"
-
-[[bin]]
-name = "_id_"
-path = "api/user/[id].rs"
-
-[[bin]]
 name = "blog"
 path = "api/blog/post.rs"
 
