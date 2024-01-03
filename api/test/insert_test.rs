@@ -1,36 +1,35 @@
 use dotenv;
 use postgrest::Postgrest;
-// use serde::Serialize;
-use serde_json::json;
 use vercel_runtime::{run, Body, Error, Request, Response, StatusCode};
+use serde_json::json;
 
 #[tokio::main]
 async fn main() -> Result<(), Error> {
     run(handler).await
 }
 
-pub async fn handler(_req: Request) -> Result<Response<Body>, Error> {
+pub async fn handler(req: Request) -> Result<Response<Body>, Error> {
     dotenv::dotenv().ok();
 
-    let client_with_token = Postgrest::new(dotenv::var("SUPABASE_URL").unwrap())
+    let req_body = req.into_body();
+    let binary_str = String::from_utf8_lossy(&req_body);
+    let t: Test = serde_json::from_str(&binary_str).unwrap();
+
+    let supabase = Postgrest::new(dotenv::var("SUPABASE_URL").unwrap())
         .insert_header("apikey", dotenv::var("SUPABASE_ANON_KEY").unwrap());
 
-    let new_row = Test {
-        message: "Hello, supabase!".to_string(),
-    };
-
-    let ires = client_with_token
+    let res_body = supabase
         .from("test")
         .insert(
             json!({
-                "message": new_row.message
+                "message": t.message.to_string()
             })
             .to_string(),
         )
         .execute()
         .await?;
 
-    let ibody = ires.text().await?;
+    let ibody = res_body.text().await?;
 
     let res = Response::builder()
         .status(StatusCode::OK)
@@ -40,6 +39,7 @@ pub async fn handler(_req: Request) -> Result<Response<Body>, Error> {
     Ok(res)
 }
 
+#[derive(Debug, serde::Deserialize)]
 struct Test {
     message: String,
 }
