@@ -51,3 +51,7 @@ path = "api/blog/get_posts.rs"
 [[bin]]
 name = "test"
 path = "api/test/index.rs"
+
+[[bin]]
+name = "insert_test"
+path = "api/test/insert_test.rs"
