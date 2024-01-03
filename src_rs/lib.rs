@@ -3,7 +3,6 @@ use std::collections::HashMap;
 use url::Url;
 use vercel_runtime::{Error, Request};
 
-// mod blog;
 // bring blog into scope
 pub mod blog;
 
