@@ -17,6 +17,8 @@ rand = "0.8.5"
 url = "2.4.1"
 vercel_runtime = "1.1.0"
 warp = "0.3.6"
+postgrest = "1.6.0"
+dotenv = "0.15.0"
 # vercel_runtime = { version = "1.1.0", path = "../../crates/vercel_runtime" }
 
 [lib]
@@ -27,18 +29,6 @@ name = "index"
 path = "api/index.rs"
 
 [[bin]]
-name = "simple"
-path = "api/simple.rs"
-
-[[bin]]
-name = "complex"
-path = "api/complex.rs"
-
-[[bin]]
-name = "_id_"
-path = "api/user/[id].rs"
-
-[[bin]]
 name = "blog"
 path = "api/blog/post.rs"
 
@@ -46,3 +36,10 @@ path = "api/blog/post.rs"
 name = "get_blog_posts"
 path = "api/blog/get_posts.rs"
 
+[[bin]]
+name = "test"
+path = "api/test/index.rs"
+
+[[bin]]
+name = "insert_test"
+path = "api/test/insert_test.rs"
