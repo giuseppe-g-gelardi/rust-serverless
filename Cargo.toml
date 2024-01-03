@@ -41,3 +41,8 @@ path = "api/user/[id].rs"
 [[bin]]
 name = "blog"
 path = "api/blog/post.rs"
+
+[[bin]]
+name = "get_blog_posts"
+path = "api/blog/get_posts.rs"
+

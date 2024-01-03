@@ -3,6 +3,7 @@ pub mod blog {
 
     #[derive(Debug, Serialize, Deserialize)]
     pub struct BlogPost {
+        pub id: String,
         pub title: String,
         pub content: String,
         pub author: String, // essentially user?
@@ -12,6 +13,7 @@ pub mod blog {
 
     impl BlogPost {
         pub fn new(
+            id: String,
             title: String,
             content: String,
             author: String,
@@ -19,6 +21,7 @@ pub mod blog {
             is_published: bool,
         ) -> Self {
             Self {
+                id,
                 title,
                 content,
                 author,

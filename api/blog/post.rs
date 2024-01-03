@@ -39,6 +39,7 @@ pub async fn handler(req: Request) -> Result<Response<Body>, Error> {
                 Ok(input) => {
                     // Use the deserialized input to create a new BlogPost
                     let new_blog_post = BlogPost::new(
+                        input.id,
                         input.title,
                         input.content,
                         input.author,
