@@ -1,4 +1,4 @@
-import PostButton from "./components/post_button";
+import PostButton from "~/components/post_button";
 
 export default async function Home() {
   const res = await fetch("http://localhost:8000/api/simple");
