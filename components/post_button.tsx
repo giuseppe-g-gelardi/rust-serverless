@@ -6,12 +6,11 @@ export default function PostButton() {
 
   useEffect(() => {
     is_mounted_ref.current = true;
-    console.log("mounted", is_mounted_ref.current);
     return () => {
       is_mounted_ref.current = false;
-      console.log("unmounted", is_mounted_ref.current);
     };
   });
+
   const post_handler = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     const post_data = await new_post();

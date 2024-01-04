@@ -2,8 +2,14 @@
 import useScrollPosition from "@react-hook/window-scroll";
 import Icon from "./icon";
 import { useRange } from "../hooks/useRange";
+import { type ReactNode } from "react";
+import Link from "next/link";
 
-export default function Navbar() {
+interface NavbarProps {
+  children: ReactNode;
+}
+
+export default function Navbar({ children }: NavbarProps) {
   const y = useScrollPosition(60);
   const navX = useRange(y, 0, 50, 0, 42);
   const logoScale = useRange(y, 0, 50, 1, 0.8);
@@ -23,7 +29,7 @@ export default function Navbar() {
         >
           <path d="M37.59.25l36.95 64H.64l36.95-64z"></path>
         </svg>
-        <ol className="flex gap-4">
+        <ol className="flex gap-4 w-full">
           <li aria-hidden className="text-zinc-700">
             /
           </li>
@@ -42,6 +48,15 @@ export default function Navbar() {
             </span>
             copy-paste the code
           </li>
+
+          <li aria-hidden className="text-zinc-700">
+            /
+          </li>
+          <li className="flex items-center mr-0 ml-auto">
+            <span className="inline-flex h-5 w-5 items-center justify-center rounded-full border border-zinc-700 bg-black p-1">
+              <Link href="/login">Login</Link>
+            </span>
+          </li>
         </ol>
       </header>
       <nav className="sticky top-0 flex border-b border-zinc-700 bg-zinc-900 text-sm">
@@ -51,6 +66,9 @@ export default function Navbar() {
           }}
           className="relative flex gap-4 px-6 py-4 text-zinc-400"
         >
+          <li>
+            <Link href="/">Home</Link>
+          </li>
           <li>Project</li>
           <li className="text-zinc-200">Deployments</li>
           <li>Analytics</li>
@@ -58,19 +76,12 @@ export default function Navbar() {
           <li>Logs</li>
           <li>Storage</li>
           <li>Settings</li>
+          <li>
+            <Link href="/blog">Blog</Link>
+          </li>
         </ol>
       </nav>
-      <main className="mx-auto my-12 max-w-5xl rounded-md border border-zinc-800">
-        <table className="w-full">
-          <tbody>
-            {[...Array(100)].map((_, i) => (
-              <tr key={i} className="h-12 border-b border-zinc-800 bg-zinc-950">
-                <td />
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </main>
+      {children}
     </div>
   );
 }

@@ -8,7 +8,7 @@ const quicksand = Quicksand({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "sup",
-  description: "where is where the stuff is",
+  description: "this is where the stuff is",
 };
 
 interface LayoutProps {
@@ -19,10 +19,7 @@ export default function RootLayout({ children }: LayoutProps) {
   return (
     <html lang="en">
       <body className={quicksand.className}>
-        <Navbar />
-        <main className="mx-auto my-12 max-w-5xl rounded-md border border-zinc-800">
-          {children}
-        </main>
+        <Navbar>{children}</Navbar>
       </body>
     </html>
   );
