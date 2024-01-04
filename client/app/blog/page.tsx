@@ -4,8 +4,9 @@ export default async function Blog() {
     headers: {
       "Content-Type": "application/json",
       "Access-Control-Allow-Origin": "*",
-      Cookie:
-        "_vercel_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJZU29QYmZtcFZmTG56VGVYUW1hcHhCMzEiLCJpYXQiOjE3MDQzODU4NDAsImF2YXRhciI6bnVsbCwiYXVkIjoicnVzdC1zZXJ2ZXJsZXNzLTh0eHh6bmkxMC1naXVzZXBwZS1nLWdlbGFyZGkudmVyY2VsLmFwcCIsInVzZXJuYW1lIjoiZ2l1c2VwcGUtZy1nZWxhcmRpIiwic3ViIjoic3NvLXByb3RlY3Rpb24ifQ.3ZeOvOgcJjLe7doTQtiySVGKo2PNlDsHD_hLzQGXHLw",
+      Cookie: "*",
+      // Cookie:
+      //   "_vercel_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJZU29QYmZtcFZmTG56VGVYUW1hcHhCMzEiLCJpYXQiOjE3MDQzODU4NDAsImF2YXRhciI6bnVsbCwiYXVkIjoicnVzdC1zZXJ2ZXJsZXNzLTh0eHh6bmkxMC1naXVzZXBwZS1nLWdlbGFyZGkudmVyY2VsLmFwcCIsInVzZXJuYW1lIjoiZ2l1c2VwcGUtZy1nZWxhcmRpIiwic3ViIjoic3NvLXByb3RlY3Rpb24ifQ.3ZeOvOgcJjLe7doTQtiySVGKo2PNlDsHD_hLzQGXHLw",
     },
   });
   console.log("res: ", res);

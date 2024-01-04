@@ -36,6 +36,7 @@ async function new_post() {
       headers: {
         "Content-Type": "application/json",
         "Access-Control-Allow-Origin": "*",
+        Cookie: "*",
       },
       body: JSON.stringify({
         title: "My First Post",
