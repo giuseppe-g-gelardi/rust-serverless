@@ -76,3 +76,8 @@ pub async fn handler(req: Request) -> Result<Response<Body>, Error> {
 
     Ok(res)
 }
+
+pub struct SBUser {
+    pub id: String,          // UUID :|
+    pub instance_id: String, // also a UUID :|
+}
