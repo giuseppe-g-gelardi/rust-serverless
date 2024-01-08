@@ -11,19 +11,19 @@
       "headers": [
         {
           "key": "Access-Control-Allow-Origin",
-          "value": "http://localhost:3000/*"
+          "value": "http://localhost:3000/"
         },
         {
           "key": "Access-Control-Allow-Methods",
-          "value": "*"
+          "value": "OPTIONS, POST, GET, PUT, DELETE, PATCH"
         },
         {
           "key": "Access-Control-Allow-Headers",
-          "value": "*"
+          "value": "Content-Type, Authorization, x-requested-with, x-auth-token, origin, accept"
         },
         {
           "key": "Access-Control-Allow-Credentials",
-          "value": "*"
+          "value": "true"
         }
       ]
     }
