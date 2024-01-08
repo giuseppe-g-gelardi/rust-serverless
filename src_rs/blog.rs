@@ -3,7 +3,9 @@ pub mod blog {
 
     #[derive(Debug, Serialize, Deserialize)]
     pub struct BlogPost {
-        pub id: String,
+        // #[serde(skip_serializing_if = "Option::is_none")]
+        #[serde(default)]
+        pub id: Option<String>,
         pub title: String,
         pub content: String,
         pub author: String, // essentially user?
@@ -13,7 +15,7 @@ pub mod blog {
 
     impl BlogPost {
         pub fn new(
-            id: String,
+            id: Option<String>,
             title: String,
             content: String,
             author: String,

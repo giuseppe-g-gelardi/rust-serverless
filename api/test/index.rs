@@ -22,3 +22,4 @@ pub async fn handler(_req: Request) -> Result<Response<Body>, Error> {
 
     Ok(res)
 }
+

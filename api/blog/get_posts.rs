@@ -37,7 +37,7 @@ pub async fn handler(_req: Request) -> Result<Response<Body>, Error> {
 fn generate_blog_posts() -> Vec<BlogPost> {
     let blog_posts = vec![
         BlogPost {
-            id: "1".to_string(),
+            id: Some("1".to_string()),
             title: "My first blog post".to_string(),
             content: "This is my first blog post".to_string(),
             author: "John Doe".to_string(),
@@ -45,7 +45,7 @@ fn generate_blog_posts() -> Vec<BlogPost> {
             is_published: true,
         },
         BlogPost {
-            id: "2".to_string(),
+            id: Some("2".to_string()),
             title: "My second blog post".to_string(),
             content: "This is my second blog post".to_string(),
             author: "John Doe".to_string(),
@@ -53,7 +53,7 @@ fn generate_blog_posts() -> Vec<BlogPost> {
             is_published: true,
         },
         BlogPost {
-            id: "3".to_string(),
+            id: Some("3".to_string()),
             title: "My third blog post".to_string(),
             content: "This is my third blog post".to_string(),
             author: "John Doe".to_string(),
@@ -61,7 +61,7 @@ fn generate_blog_posts() -> Vec<BlogPost> {
             is_published: false,
         },
         BlogPost {
-            id: "4".to_string(),
+            id: Some("4".to_string()),
             title: "My fourth blog post".to_string(),
             content: "This is my fourth blog post".to_string(),
             author: "John Doe".to_string(),

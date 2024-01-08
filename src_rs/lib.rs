@@ -22,7 +22,7 @@ pub fn req_url_parser(req: Request, query: &str) -> Result<Option<String>, Error
 
 pub fn new_blog_post() -> blog::blog::BlogPost {
     return blog::blog::BlogPost::new(
-        "1704202457-QVNO".to_string(),
+        Some("1704202457-QVNO".to_string()),
         "A trip to Iceland".to_string(),
         "Iceland is a Nordic island country in the North Atlantic, with a population of 360,390 and an area of 103,000 km2 (40,000 sq mi), making it the most sparsely populated country in Europe. The capital and largest city is Reykjavík. Reykjavík and the surrounding areas in the southwest of the country are home to over two-thirds of the population. Iceland is volcanically and geologically active. The interior consists of a plateau characterised by sand and lava fields, mountains, and glaciers, and many glacial rivers flow to the sea through the lowlands. Iceland is warmed by the Gulf Stream and has a temperate climate, despite a high latitude just outside the Arctic Circle. Its high latitude and marine influence keep summers chilly, with most of the archipelago having a tundra climate.".to_string(),
         "Watson & Crick".to_string(),

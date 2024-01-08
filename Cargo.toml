@@ -19,6 +19,7 @@ vercel_runtime = "1.1.0"
 warp = "0.3.6"
 postgrest = "1.6.0"
 dotenv = "0.15.0"
+supabase-rust = "0.1.2"
 # vercel_runtime = { version = "1.1.0", path = "../../crates/vercel_runtime" }
 
 [lib]
@@ -43,3 +44,16 @@ path = "api/test/index.rs"
 [[bin]]
 name = "insert_test"
 path = "api/test/insert_test.rs"
+
+[[bin]]
+name = "register"
+path = "api/auth/register.rs"
+
+[[bin]]
+name = "login"
+path = "api/auth/login.rs"
+
+[[bin]]
+name = "get_user"
+path = "api/users/get_user.rs"
+
