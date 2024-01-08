@@ -11,8 +11,8 @@ async function register_user({
 }): Promise<void> {
   try {
     const res = await fetch(
-      // "https://rust-serverless.vercel.app/api/auth/login",
-      "http://localhost:8000/api/auth/login",
+      "https://rust-serverless.vercel.app/api/auth/login", // prod
+      // "http://localhost:8000/api/auth/login",
       {
         method: "POST",
         headers: {

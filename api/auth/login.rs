@@ -1,7 +1,7 @@
 use dotenv;
+use serde_json::json;
 use supabase_rust::Supabase;
 use vercel_runtime::{run, Body, Error, Request, Response, StatusCode};
-use serde_json::json;
 
 #[derive(Debug, serde::Deserialize)]
 struct UserRegistration {
@@ -25,7 +25,6 @@ pub async fn handler(req: Request) -> Result<Response<Body>, Error> {
     let supabase_key = dotenv::var("SUPABASE_ANON_KEY").unwrap();
     let supabase = Supabase::new(Some(&supabase_url), Some(&supabase_key), None);
 
-    println!("Request: {:?}", req.method());
     if req.method() == "OPTIONS" {
         let res = Response::builder()
             .status(StatusCode::OK)
@@ -40,7 +39,6 @@ pub async fn handler(req: Request) -> Result<Response<Body>, Error> {
     let binary_str = String::from_utf8_lossy(&req_body);
     // let u: UserRegistration = serde_json::from_str(&binary_str).unwrap();
     let u: Result<UserRegistration, _> = serde_json::from_str(&binary_str);
-    println!("User: {:?}", u);
 
     // Improve error handling for JSON parsing
     let u = match u {
@@ -62,13 +60,12 @@ pub async fn handler(req: Request) -> Result<Response<Body>, Error> {
             if res.status().is_success() {
                 // Parse the response body to extract tokens
                 let json_response: serde_json::Value = res.json().await.unwrap();
-                println!("SUPABASE json Response: {:?}", json_response);
 
                 if let Some(access_token) =
                     json_response.get("access_token").and_then(|t| t.as_str())
                 {
                     // Sign-in was successful, access_token is available
-                    println!("Access Token: {}", access_token);
+                    // println!("Access Token: {}", access_token);
                     let success_res = Response::builder()
                         .status(StatusCode::OK)
                         .header("Content-Type", "application/json")
@@ -81,7 +78,8 @@ pub async fn handler(req: Request) -> Result<Response<Body>, Error> {
                 } else {
                     println!("Access token not found in the response.");
                 }
-                // refresh token?? // ... (handle successful sign-in)
+                // if refresh token?? // ... (handle successful sign-in)
+                // else ???
             } else {
                 // Handle unsuccessful sign-in
                 println!("Sign In Failed. Status: {:?}", res.status());
@@ -107,8 +105,7 @@ pub async fn handler(req: Request) -> Result<Response<Body>, Error> {
     Ok(res)
 }
 
-//
-// //                if let Some(refresh_token) =
+//                 if let Some(refresh_token) =
 //                     json_response.get("refresh_token").and_then(|t| t.as_str())
 //                 {
 //                     // Refresh token is available (optional)
