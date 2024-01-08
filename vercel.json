@@ -11,11 +11,11 @@
       "headers": [
         {
           "key": "Access-Control-Allow-Origin",
-          "value": "http://localhost:3000,https://localhost:3000,localhost:3000"
+          "value": "*"
         },
         {
           "key": "Access-Control-Allow-Methods",
-          "value": "OPTIONS, POST, GET, PUT, DELETE, PATCH"
+          "value": "GET,HEAD,PUT,PATCH,POST,DELETE"
         },
         {
           "key": "Access-Control-Allow-Headers",
