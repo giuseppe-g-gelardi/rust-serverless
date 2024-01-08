@@ -52,3 +52,8 @@ path = "api/auth/register.rs"
 [[bin]]
 name = "login"
 path = "api/auth/login.rs"
+
+[[bin]]
+name = "get_user"
+path = "api/users/get_user.rs"
+

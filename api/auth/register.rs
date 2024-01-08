@@ -33,9 +33,16 @@ pub async fn handler(req: Request) -> Result<Response<Body>, Error> {
             println!("res MATCH: {:?}", res);
             // if ok, check if user exists, if not, create User
             // if user exists, login
+            //
+            // i think supabase is doing this automatically so i need to setup
+            // a db function to create a profile for the user so it s queryable
+            // from the public api.
+            //
+            // and figure out what i need to do to get it to error our so i can
+            // can handle it properly.
         }
         Err(err) => {
-            println!("err MATCH: {:?}", err);
+            println!("ERRRRRRR: {:?}", err);
         }
     }
 
