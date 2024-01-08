@@ -1,13 +1,16 @@
 use dotenv;
-// use postgrest::Postgrest;
-use vercel_runtime::{run, Body, Error, Request, Response, StatusCode};
-// use serde_json::json;
 use supabase_rust::Supabase;
+use vercel_runtime::{run, Body, Error, Request, Response, StatusCode};
 
 #[derive(Debug, serde::Deserialize)]
 struct UserRegistration {
     email: String,
     password: String,
+}
+
+pub struct SBUser {
+    pub id: String,          // UUID :|
+    pub instance_id: String, // also a UUID :|
 }
 
 #[tokio::main]
@@ -30,8 +33,6 @@ pub async fn handler(req: Request) -> Result<Response<Body>, Error> {
         .await
     {
         Ok(res) => {
-            println!("Sign In Response: {:?}", res);
-
             // Check if the response status is OK
             if res.status().is_success() {
                 // Parse the response body to extract tokens
@@ -41,7 +42,13 @@ pub async fn handler(req: Request) -> Result<Response<Body>, Error> {
                 {
                     // Sign-in was successful, access_token is available
                     println!("Access Token: {}", access_token);
+                    let success_res = Response::builder()
+                        .status(StatusCode::OK)
+                        .header("Content-Type", "text/html")
+                        .header("Set-Cookie", format!("access_token={}", access_token)) // sb-access-token ??
+                        .body(access_token.into())?;
                     // You may want to do something with the access token, such as storing it securely
+                    return Ok(success_res);
                 } else {
                     println!("Access token not found in the response.");
                 }
@@ -75,9 +82,4 @@ pub async fn handler(req: Request) -> Result<Response<Body>, Error> {
         .body("OK".into())?;
 
     Ok(res)
-}
-
-pub struct SBUser {
-    pub id: String,          // UUID :|
-    pub instance_id: String, // also a UUID :|
 }

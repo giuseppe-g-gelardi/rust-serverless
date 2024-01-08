@@ -22,6 +22,8 @@ async function register_user<T>(form: RegisterForm): Promise<T> {
     throw new Error("Failed to register user");
   }
 
+  console.log(res.json());
+
   return res.json();
 }
 
