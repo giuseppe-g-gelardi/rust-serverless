@@ -2,29 +2,45 @@
 
 import { FormEvent, useState } from "react";
 
-type RegisterForm = {
+async function register_user({
+  email,
+  password,
+}: {
   email: string;
   password: string;
-};
+}): Promise<void> {
+  try {
+    const res = await fetch(
+      // "https://rust-serverless.vercel.app/api/auth/login",
+      "http://localhost:8000/api/auth/login",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: String(email),
+          password: String(password),
+        }),
+      },
+    );
 
-async function register_user<T>(form: RegisterForm): Promise<T> {
-  const res = await fetch("https://rust-serverless.vercel.app/api/auth/login", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "Access-Control-Allow-Origin": "*",
-      Cookie: "*",
-    },
-    body: JSON.stringify(form),
-  });
+    console.log("res object before json(): ", res);
 
-  if (!res.ok) {
-    throw new Error("Failed to register user");
+    if (!res.ok) {
+      throw new Error("Failed to register user");
+    }
+
+    const jsonResponse = await res.json();
+
+    console.log("this is the logged response.json(): ", jsonResponse);
+    console.log("response object after json(): ", res);
+
+    return jsonResponse;
+  } catch (error: unknown) {
+    console.error("Failed to register user", error);
+    throw error;
   }
-
-  console.log(res.json());
-
-  return res.json();
 }
 
 export default function LoginForm() {
@@ -35,9 +51,9 @@ export default function LoginForm() {
     e.preventDefault();
 
     try {
-      await register_user({ email, password } as RegisterForm);
+      await register_user({ email, password });
     } catch (e) {
-      console.log(e);
+      console.log("Error: ", e);
     }
   };
 
