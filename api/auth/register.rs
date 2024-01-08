@@ -1,8 +1,6 @@
 use dotenv;
-// use postgrest::Postgrest;
-use vercel_runtime::{run, Body, Error, Request, Response, StatusCode};
-// use serde_json::json;
 use supabase_rust::Supabase;
+use vercel_runtime::{run, Body, Error, Request, Response, StatusCode};
 
 #[derive(Debug, serde::Deserialize)]
 struct UserRegistration {
@@ -30,26 +28,38 @@ pub async fn handler(req: Request) -> Result<Response<Body>, Error> {
         .await
     {
         Ok(res) => {
-            println!("res MATCH: {:?}", res);
-            // if ok, check if user exists, if not, create User
-            // if user exists, login
-            //
-            // i think supabase is doing this automatically so i need to setup
-            // a db function to create a profile for the user so it s queryable
-            // from the public api.
-            //
-            // and figure out what i need to do to get it to error our so i can
-            // can handle it properly.
+            if res.status().is_success() {
+                let res = Response::builder()
+                    .status(StatusCode::OK)
+                    .header("Content-Type", "text/html")
+                    .body("OK".into())?;
+
+                return Ok(res);
+            } else {
+                let res = Response::builder()
+                    .status(StatusCode::BAD_REQUEST)
+                    .header("Content-Type", "text/html")
+                    .body("Bad Request".into())?;
+
+                return Ok(res);
+            }
         }
         Err(err) => {
             println!("ERRRRRRR: {:?}", err);
         }
     }
 
+    // let res = Response::builder()
+    //     .status(StatusCode::OK)
+    //     .header("Content-Type", "text/html")
+    //     .body("OK".into())?;
+    //
+    // Ok(res)
+
     let res = Response::builder()
-        .status(StatusCode::OK)
+        .status(StatusCode::INTERNAL_SERVER_ERROR)
         .header("Content-Type", "text/html")
-        .body("OK".into())?;
+        .body("Internal Server Error".into())?;
 
     Ok(res)
 }
