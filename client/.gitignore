@@ -28,6 +28,12 @@ yarn-error.log*
 # local env files
 .env*.local
 
+# global env files
+.env
+
+# no longer used
+.deprecated
+
 # vercel
 .vercel
 

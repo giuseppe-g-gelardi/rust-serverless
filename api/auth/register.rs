@@ -31,14 +31,14 @@ pub async fn handler(req: Request) -> Result<Response<Body>, Error> {
             if res.status().is_success() {
                 let res = Response::builder()
                     .status(StatusCode::OK)
-                    .header("Content-Type", "text/html")
+                    .header("Content-Type", "application/json")
                     .body("OK".into())?;
 
                 return Ok(res);
             } else {
                 let res = Response::builder()
                     .status(StatusCode::BAD_REQUEST)
-                    .header("Content-Type", "text/html")
+                    .header("Content-Type", "application/json")
                     .body("Bad Request".into())?;
 
                 return Ok(res);
@@ -51,14 +51,14 @@ pub async fn handler(req: Request) -> Result<Response<Body>, Error> {
 
     // let res = Response::builder()
     //     .status(StatusCode::OK)
-    //     .header("Content-Type", "text/html")
+    //     .header("Content-Type", "application/json")
     //     .body("OK".into())?;
     //
     // Ok(res)
 
     let res = Response::builder()
         .status(StatusCode::INTERNAL_SERVER_ERROR)
-        .header("Content-Type", "text/html")
+        .header("Content-Type", "application/json")
         .body("Internal Server Error".into())?;
 
     Ok(res)
@@ -86,5 +86,5 @@ pub async fn handler(req: Request) -> Result<Response<Body>, Error> {
 //
 // let res = Response::builder()
 //     .status(StatusCode::OK)
-//     .header("Content-Type", "text/html")
+//     .header("Content-Type", "application/json")
 //     .body(ibody.into())?;

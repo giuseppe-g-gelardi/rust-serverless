@@ -33,7 +33,7 @@ pub async fn handler(req: Request) -> Result<Response<Body>, Error> {
 
     let res = Response::builder()
         .status(StatusCode::OK)
-        .header("Content-Type", "text/html")
+        .header("Content-Type", "application/json")
         .body(ibody.into())?;
 
     Ok(res)

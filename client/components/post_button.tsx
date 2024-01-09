@@ -39,7 +39,7 @@ async function new_post() {
         Cookie: "*",
       },
       body: JSON.stringify({
-        title: "My First Post",
+        title: "My who knows Post",
         content: "This is my first blog post",
         author: "me",
         date: "today",

@@ -74,6 +74,9 @@ pub async fn handler(req: Request) -> Result<Response<Body>, Error> {
                         .body(json!({ "access_token": access_token }).to_string().into())?;
                     // You may want to do something with the access token, such as storing it securely
 
+                    // store access token in cookie 
+                    
+
                     return Ok(success_res);
                 } else {
                     println!("Access token not found in the response.");

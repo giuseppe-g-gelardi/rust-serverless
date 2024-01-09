@@ -71,7 +71,7 @@ pub async fn handler(req: Request) -> Result<Response<Body>, Error> {
 
     let res = Response::builder()
         .status(StatusCode::OK)
-        .header("Content-Type", "text/html")
+        .header("Content-Type", "applicaiton/json")
         .body("OK".into())?;
 
     Ok(res)
@@ -101,7 +101,7 @@ pub struct SBUser {
 //
 //     let res = Response::builder()
 //         .status(StatusCode::OK)
-//         .header("Content-Type", "text/html")
+//         .header("Content-Type", "application/json")
 //         .body(tbody.into())?;
 //
 //     Ok(res)
